@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>e-Commerce Website</title>
+</head>
+  <style>
+     #productListDiv {
+       display:flex;
+}
+#productListDiv>div {
+     border:3px solid black;
+     width: 300px;
+     padding:10px;
+     margin:10px;
+     border-radius:5px;
+     font-family: sans-serif;
+}
+
+
+  </style>
+   
+
+<body>
+    <h1>ALI EXPRESS</h1>
+    <a href="./index.html">Home</a><br>
+    <a href="./products.html">All Products</a>
+    <br>
+    <br>
+
+    <div id="productsListDiv">
+</div>
+
+    
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    async function getAllProducts() {
+        try {
+            const response = 
+            await axios.get("http://localhost:4000/products")
+                console.log(response.data.data);
+             
+
+             let productsListDiv = document.querySelector("#productsListDiv")
+
+               productsListDiv.innerHTML = "";
+               response.data.data.map(eachProduct => {
+                 productsListDiv.innerHTML +=
+                  `<div>
+                    <img src="./img/mwp22.webp" width="300px" alt=""/>
+                    <p> ${eachProduct.productName} </p>
+                    <p>
+                  <span>${eachProduct.currencyCode}</span>
+                  <span>${eachProduct.productPrice}</span>
+                  </p>
+                  <p> ${eachProduct.numberOfSale || 0} sold </p>
+                  <p> ${(eachProduct.isFreeShipping)
+                     ? "free shipping" : "no free shipping"} </p>
+                  <p> ${eachProduct.shopName} </p>
+                  <button class="delete" onclick="deleteProduct('${eachProduct._id}')">Delete</button>
+                  <button class="dedit" onclick="editProduct('${eachProduct._id}')">Edit</button>
+                  </div>`
+                })
+            } catch (error) {
+                console.error(error);
+            }
+     }
+    
+     getAllProducts();
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
